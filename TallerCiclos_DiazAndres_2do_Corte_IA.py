@@ -306,3 +306,64 @@ def calcular_menor_valor(no_valores=0):
 print('\n------ COMPARATIVO DE VALORES (EVALUAR EL MENOR) ------\n')
 no_valores = int(input('Ingrese la cantidad de números a evaluar: '))
 calcular_menor_valor(no_valores)
+
+# 6. Cinco miembros de un club contra la obesidad desean saber cuanto han
+# bajado o subido de peso desde la última vez que se reunieron. Para esto se
+# debe realizar un ritual de pesaje en donde cada uno se pesa en diez
+# básculas distintas para así tener el pormedio mas exacto de su peso. Si
+# existe diferencia positiva entre este promedio de peso y el peso de la última
+# vez que se reunieron, significa que subieron de peso. Pero si la diferencia
+# es negativa, significa que bajaron. Lo que el problema requere es que por
+# cada persona se imprima un letrero que diga: “SUBIÓ” o “BAJÓ” y la
+# cantidad de kilos que subió o bajó de peso.
+
+# Supuestos: Se trabaja bajo el supuesto de que el peso de la persona puede
+# variar en una tolerancia de +-4 kilos. Así mismo para simular la tolerancia
+# de las básculas, se tendrá en cuenta un rango de entre +-3%.
+# Las pesonas pertenecen a un grupo de 1.65 mts de altura promedio, con lo cual
+# un peso entre 80 y 100 se considera padecer obesidad tipo 1 a 2, es decir, se
+# simulara el rango de peso peso_inicial de la persona en dicho rango de peso.
+
+
+def calcular_peso(no_personas=0):
+    if(no_personas > 0):
+        no_basculas = 10
+        for persona in range(no_personas):
+            peso_bascula = 0
+            pesos = []
+            suma_pesos = 0
+            promedio_peso = 0
+            tolerancia_peso = round(random.uniform(-4, 4), 2)
+            peso_inicial = round(random.uniform(80, 100), 2)
+            respuesta = ""
+            variacion_peso = 0
+            diferencia_peso = 0
+            for peso in range(no_basculas):
+                tolerancia_bascula = random.uniform(-0.03, 0.03)
+                variacion_peso = tolerancia_peso * tolerancia_bascula
+                peso_bascula = (tolerancia_peso+variacion_peso) + peso_inicial
+                pesos.append(round(peso_bascula, 2))
+                suma_pesos += peso_bascula
+            promedio_peso = round(suma_pesos/no_basculas, 2)
+            diferencia_peso = abs(peso_inicial - promedio_peso)
+            if((peso_inicial-promedio_peso) > 0):
+                respuesta = "La persona bajó de peso"
+            elif((peso_inicial-promedio_peso) < 0):
+                respuesta = "La persona subió de peso"
+            else:
+                respuesta = "La persona mantuvo el mismo peso"
+            print(f'\n--- Resumen del seguimiento al peso de persona No '
+                  f'{persona + 1} ---\n')
+            print(f'Peso incial: {peso_inicial} kilos')
+            print(f'Toma de pesos (Kg) en las {no_basculas} básculas:'
+                  f' {pesos}')
+            print(f'Peso promedio actual: {promedio_peso} kilos')
+            print(f'{respuesta} ({round(diferencia_peso,2)} kilos)')
+    else:
+        print('\nPara realizar el cálculo correcto del peso de las personas la'
+              ', cantidad de personas en el grupo debe ser igual o mayor a 1.')
+
+
+print('\n--------- CLUB CONTRA LA OBESIDAD (SEGUIMIENTO)  ---------')
+no_personas = int(input('Ingrese número de personas en el grupo: '))
+calcular_peso(no_personas)
