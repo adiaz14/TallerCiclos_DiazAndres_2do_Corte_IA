@@ -221,3 +221,62 @@ def calcular_salario(no_trabajadores):
 print('\n---------- TOMA DE MUESTRAS DE EDADES DE ANIMALES ----------\n')
 no_trabajadores = int(input('Ingrese número de trabajadores (mayor a 0): '))
 calcular_salario(no_trabajadores)
+
+# 4. Calcular el promedio de edades de hombres, mujeres y de todo un grupo
+# de alumnos.
+
+
+def calcular_promedio_edades(no_personas=0):
+    if(no_personas > 0):
+        no_hombres = 0
+        no_mujeres = 0
+        suma_hombres = 0
+        suma_mujeres = 0
+        suma_total = 0
+        promedio_edad_hombres = 0
+        promedio_edad_mujeres = 0
+        promedio_edad_total = 0
+        edades_hombres = []
+        edades_mujeres = []
+        for personal in range(no_personas):
+            genero = random.randint(0, 1)
+            edad = random.randint(1, 118)
+            if(genero > 0):
+                suma_hombres += edad
+                no_hombres += 1
+                edades_hombres.append(edad)
+            else:
+                suma_mujeres += edad
+                no_mujeres += 1
+                edades_mujeres.append(edad)
+            suma_total += edad
+        if(no_hombres > 0):
+            promedio_edad_hombres = suma_hombres/no_hombres
+        else:
+            promedio_edad_hombres = 0
+        if(no_mujeres > 0):
+            promedio_edad_mujeres = suma_mujeres/no_mujeres
+        else:
+            promedio_edad_mujeres = 0
+        promedio_edad_total = suma_total/no_personas
+        print('\n--- Resumen de estadísticas de promedio de edades del grupo'
+              '---\n')
+        print(f'Total población: {no_personas}')
+        print(f'Número de hombres: {no_hombres}')
+        print(f'Número de mujeres: {no_mujeres}')
+        print(f'Promedio de edad de hombres del grupo: '
+              f'{promedio_edad_hombres:.2f}')
+        print(f'Promedio de edad de mujeres del grupo: '
+              f'{promedio_edad_mujeres:.2f}')
+        print(f'Promedio de edad del grupo: {promedio_edad_total:.2f}')
+        print('\n------ Detalle de listado de edades de la población ------\n')
+        print(f'Número de hombres: {edades_hombres}')
+        print(f'Número de mujeres: {edades_mujeres}')
+    else:
+        print('\nPara realizar un cálculo válido del promedio de edad de un '
+              'grupo, el número de la población debe ser igual o mayor a 1.')
+
+
+print('\n------ TOMA DE MUESTRAS DE EDADES DE UN GRUPO DE PERSONAS ------\n')
+no_personas = int(input('Ingrese número de personas (mayor a 0): '))
+calcular_promedio_edades(no_personas)
