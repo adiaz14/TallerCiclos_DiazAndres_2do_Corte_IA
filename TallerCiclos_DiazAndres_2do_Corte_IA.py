@@ -416,3 +416,86 @@ def comprar():
         respuesta = int(
             input('1. Comprar más artículos\n2. Finalizar compra \n> '))
     precios_articulos(articulos, precios, cantidades, total_precio)
+
+
+# 8. Un teatro otorga descuentos según la edad del cliente, determinar la
+# cantidad del dinero que el teatro deja de percibir por cada una de las
+# categorias. Tomar en cuenta que los niños menores de 5 años no pueden
+# entrar al teatro y que existe un precio único en los asientos.
+# Los descuentos se hacen tomando en cuenta el siguiente cuadro:
+"""
+-------------------------------------
+|      Edad         |  % Descuento  |
+------------------------------------
+|      5 - 14       |      35%      |
+|     15 - 19       |      25%      |
+|     20 - 45       |      10%      |
+|     46 - 65       |      25%      |
+|  66 en adelante   |      35%      |
+-------------------------------------
+"""
+
+# Generar edades aleatorias
+
+
+def generar_edad():
+    edad = random.randint(5, 118)
+    return edad
+
+
+# Calcular descuentos
+
+
+def calcular_descuentos(no_clientes=0, precio_entradas=0):
+    if(no_clientes > 0 and precio_entradas > 0):
+        descuento_uno = 0
+        descuento_dos = 0
+        descuento_tres = 0
+        descuento_cuatro = 0
+        descuento_cinco = 0
+        descuento_total = 0
+        resultado = {'entre 5-14 años': 0,
+                     'entre 15-19 años': 0,
+                     'entre 20-45 años': 0,
+                     'entre 46-65 años': 0,
+                     'de 66 años en adelante': 0,
+                     'listado de edades': []}
+        for valor in range(no_clientes):
+            edad = generar_edad()
+            if(edad >= 5 and edad <= 14):
+                descuento_uno = precio_entradas * 0.35
+                resultado['entre 5-14 años'] += descuento_uno
+            elif(edad >= 15 and edad <= 19):
+                descuento_dos = precio_entradas * 0.25
+                resultado['entre 15-19 años'] += descuento_dos
+            elif(edad >= 20 and edad <= 45):
+                descuento_tres = precio_entradas * 0.10
+                resultado['entre 20-45 años'] += descuento_tres
+            elif(edad >= 46 and edad <= 65):
+                descuento_cuatro = precio_entradas * 0.25
+                resultado['entre 46-65 años'] += descuento_cuatro
+            else:
+                descuento_cinco = precio_entradas * 0.35
+                resultado['de 66 años en adelante'] += descuento_cinco
+            resultado['listado de edades'].append(edad)
+        print('\n------ Resumen financiero de descuento de entradas ------\n')
+        print(f'Cantidad de personas que ingresaron al teatro: {no_clientes}')
+        print(f'Precio estándar de la entrada: ${precio_entradas}')
+        for llave, valor in resultado.items():
+            if('años' in llave):
+                print(f'Total Descuentos por rango de edad {llave}:'
+                      f' ${round(valor,2)}')
+                descuento_total += valor
+        res = {key: resultado[key] for key in resultado.keys()
+               & {'listado de edades'}}
+        print(f'valor total de los decuentos: ${round(descuento_total,2)}')
+        print(f"Lista de edades de clientes: {res.get('listado de edades')}")
+    else:
+        print('\nEl número de personas que entran al teatro y el precio de'
+              ' las entradas debe ser mayor a cero.')
+
+
+print('\n--------- ESTADO DE RESULTADO FINANCIERO DE DESCUENTOS  ---------\n')
+no_clientes = int(input('Ingrese número de clientes del teatro: '))
+precio_entradas = float(input('Ingrese precio de las entradas: '))
+calcular_descuentos(no_clientes, precio_entradas)
