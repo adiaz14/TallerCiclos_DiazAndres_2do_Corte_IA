@@ -367,3 +367,52 @@ def calcular_peso(no_personas=0):
 print('\n--------- CLUB CONTRA LA OBESIDAD (SEGUIMIENTO)  ---------')
 no_personas = int(input('Ingrese número de personas en el grupo: '))
 calcular_peso(no_personas)
+
+# 7. En un supermercado una ama de casa pone en su carrito los artículos que
+# va tomando de los estantes. La señora quiere asegurarse de que el cajero
+# le cobre bien lo que ella ha comprado, por lo que cada vez que toma un
+# artículo anota su precio junto con la cantidad de artículos iguales que ha
+# tomado y determina cuanto dinero gastará en ese artículo; a esto le suma lo
+# que irá gastando en los demás artículos, hasta que decide que ya tomó
+# todo lo que necesitaba. Ayúdele a esta señora a obtener el total de su
+# compra.
+
+
+def precios_articulos(articulo, precio, cantidad, total_precio):
+    if(len(articulo) > 0 and len(precio) > 0 and len(cantidad) > 0
+       and len(total_precio) > 0):
+        respuesta = ""
+        cuenta = 0
+        precio_total = 0
+        for valor in range(len(articulo)):
+            precio_total += total_precio[valor]
+            cuenta += 1
+            respuesta = respuesta + 'Artículo No ' + str(cuenta) + ': ' + \
+                articulo[valor] + ', Precio Unitario: $' + \
+                str(precio[valor]) + ', Cantidad comprada: ' + \
+                str(cantidad[valor]) + ', Precio total compra: $' + \
+                str(total_precio[valor]) + '\n'
+        print('\n------- Resumen de la compra de la ama de casa -------\n')
+        print(respuesta)
+        print(f'El precio total de la compra es: ${round(precio_total,2)}')
+    else:
+        print('Información suministrada inválida.')
+
+
+def comprar():
+    respuesta = 1
+    articulos = []
+    precios = []
+    cantidades = []
+    total_precio = []
+    while (respuesta != 2):
+        articulo = input('Ingrese nombre del artículo: ')
+        precio = float(input('Ingrese precio del artículo: '))
+        cantidad = int(input('Ingrese cantidad: '))
+        articulos.append(articulo)
+        precios.append(precio)
+        cantidades.append(cantidad)
+        total_precio.append(precio*cantidad)
+        respuesta = int(
+            input('1. Comprar más artículos\n2. Finalizar compra \n> '))
+    precios_articulos(articulos, precios, cantidades, total_precio)
