@@ -553,3 +553,65 @@ def ventas():
     print(f'Total vendido por todos los empleados es: ${total_vendido:,.2f}')
     print(f'Total de las comisiones de todos los empleados es:'
           f' ${total_comisiones:,.2f}')
+
+# 10. La empresa Encuestas S.A desea crear una función que les permita
+# conocer de los 50.000 votos obtenidos por 3 candidatos, cual de estos fue
+# el ganador o indicar si hubo empate y la cantidad de votos obtenidos.
+
+
+def generar_resultados_votos():
+    resultado_voto = random.randint(1, 3)
+    return resultado_voto
+
+
+def conteo_votos():
+    cantidad_votos = 50000
+    votos_candidato_uno = 0
+    votos_candidato_dos = 0
+    votos_candidato_tres = 0
+    for valor in range(cantidad_votos):
+        resultado_voto = generar_resultados_votos()
+        if(resultado_voto == 1):
+            votos_candidato_uno += 1
+        elif(resultado_voto == 2):
+            votos_candidato_dos += 1
+        else:
+            votos_candidato_tres += 1
+    print('\n---------- Resumen del periodo electoral ----------\n')
+    print(f'Cantidad de votos del candidado 1: {votos_candidato_uno}')
+    print(f'Cantidad de votos del candidado 2: {votos_candidato_dos}')
+    print(f'Cantidad de votos del candidado 3: {votos_candidato_tres}\n')
+    print('Resultado de las votaciones:\n')
+    if(votos_candidato_uno == votos_candidato_dos == votos_candidato_tres):
+        print('Empate entre los 3 candidatos')
+    elif((votos_candidato_uno == votos_candidato_dos) and
+         votos_candidato_tres > votos_candidato_dos):
+        print('Empate entre los candidatos 1 y 2, pero gana el candidato 3 ')
+    elif((votos_candidato_uno == votos_candidato_tres) and
+         votos_candidato_dos > votos_candidato_uno):
+        print('Empate entre los candidatos 1 y 3, pero gana el candidato 2')
+    elif((votos_candidato_dos == votos_candidato_tres) and
+         votos_candidato_uno > votos_candidato_dos):
+        print('Empate entre los candidatos 2 y 3, pero gana el candidato 1')
+    elif((votos_candidato_dos == votos_candidato_tres) and
+         votos_candidato_uno < votos_candidato_dos):
+        print('Pierde el candidato 1, y por encima quedan en'
+              ' empate los candidatos 2 y 3')
+    elif((votos_candidato_uno == votos_candidato_dos) and
+         votos_candidato_tres < votos_candidato_dos):
+        print('Pierde el candidato 3, y por encima quedan en'
+              ' empate los candidatos 1 y 2')
+    elif((votos_candidato_uno == votos_candidato_tres) and
+         votos_candidato_dos < votos_candidato_uno):
+        print('Pierde el candidato 2, y por encima quedan en'
+              ' empate los candidatos 1 y 3')
+    elif(votos_candidato_uno > votos_candidato_dos and
+         votos_candidato_uno > votos_candidato_tres and
+         votos_candidato_dos != votos_candidato_tres):
+        print('Gana el candidato 1')
+    elif(votos_candidato_dos > votos_candidato_uno and
+         votos_candidato_dos > votos_candidato_tres and
+         votos_candidato_uno != votos_candidato_tres):
+        print('Gana el candidato 2')
+    else:
+        print('Gana el candidato 3')
