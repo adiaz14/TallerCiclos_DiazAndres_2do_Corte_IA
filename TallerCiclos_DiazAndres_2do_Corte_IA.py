@@ -499,3 +499,57 @@ print('\n--------- ESTADO DE RESULTADO FINANCIERO DE DESCUENTOS  ---------\n')
 no_clientes = int(input('Ingrese número de clientes del teatro: '))
 precio_entradas = float(input('Ingrese precio de las entradas: '))
 calcular_descuentos(no_clientes, precio_entradas)
+
+# 9. Kia Autos premia anualmente a sus mejores vendedores de acuerdo a la
+# siguiente tabla:
+
+"""
+-------------------------------------
+|   Valor vendido   |   Comisión    |
+------------------------------------
+| x <= 20 Millones  |      10%      |
+|   20 < x < 40     |      15%      |
+|   40 <= x < 80    |      20%      |
+|   80 <= x < 160   |      25%      |
+|      > 160        |      30%      |
+-------------------------------------
+"""
+
+# Realice un método que diga cuanto vendió y la comisión de los 100
+# vendedores que tiene la empresa.
+
+
+def calcular_comision(valor_vendido):
+    valor_comision = 0
+    if(valor_vendido <= 20000000):
+        valor_comision = valor_vendido * 0.1
+    elif(valor_vendido > 20000000 and valor_vendido < 40000000):
+        valor_comision = valor_vendido * 0.15
+    elif(valor_vendido >= 40000000 and valor_vendido < 80000000):
+        valor_comision = valor_vendido * 0.2
+    elif(valor_vendido >= 80000000 and valor_vendido < 160000000):
+        valor_comision = valor_vendido * 0.25
+    else:
+        valor_comision = valor_vendido * 0.3
+    return valor_comision
+
+
+def ventas():
+    cantidad_empleados = 100
+    valor_vendido = 0
+    total_vendido = 0
+    total_comisiones = 0
+    respuesta = ""
+    for i in range(cantidad_empleados):
+        valor_vendido = random.uniform(1000000, 320000000)
+        comision = calcular_comision(valor_vendido)
+        respuesta += 'Empleado No. ' + str(i+1) + '\n'\
+            'Valor vendido: ' + '$' + str(round(valor_vendido, 2)) + '\n'\
+            'Valor Comisión: ' + '$' + str(round(comision, 2)) + '\n'
+        total_vendido += valor_vendido
+        total_comisiones += comision
+    print('\n-------- Resumen de estado de comisiones --------\n')
+    print(f'{respuesta}\n ---------- Valores totalizados ----------')
+    print(f'Total vendido por todos los empleados es: ${total_vendido:,.2f}')
+    print(f'Total de las comisiones de todos los empleados es:'
+          f' ${total_comisiones:,.2f}')
