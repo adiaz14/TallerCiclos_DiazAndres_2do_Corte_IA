@@ -162,3 +162,62 @@ print('\n---------- TOMA DE MUESTRAS DE EDADES DE ANIMALES ----------\n')
 animal = input('Ingrese nombre de animal a estudiar (Elefantes, '
                'Jirafas, Chimpancés): ')
 porcentaje_edades_animales(animal)
+
+# 3. Una empresa se requiere calcular el salario semanal de cada uno de los n
+# obreros que laboran en ella. El salario se obtiene de la siguiente forma:
+# a. Si el obrero trabaja 40 horas o menos se le paga $20 por hora
+# b. Si trabaja mas de 40 horas se le paga $20 por cada una de
+# las primeras 40 horas y $25 por cada hora extra
+
+# Supuestos: Para el número random se ha tenido en cuenta una edad entre 1 y 60
+# debido a:
+# Horas ordinarias legales permitidas en Colombia: 48 por semana
+# Horas extras legales permitidas en Colombia: 12 por semana
+# Es decir, total horas legales permitidad en Colombia a la semana: 60 horas.
+
+
+def calcular_salario(no_trabajadores):
+    horario_ordinario = 40
+    valor_hora_ordinaria = 20
+    valor_hora_extra = 25
+    total_salario = 0
+    total_salario_ordinario = 0
+    total_salario_extra = 0
+    total_salario_trabajadores = 0
+    if(no_trabajadores > 0):
+        for trabajador in range(no_trabajadores):
+            horas_laboradas = random.randint(1, 60)
+            if(horas_laboradas <= horario_ordinario):
+                horas_ordinarias = horas_laboradas
+                horas_extras = 0
+                salario_ordinario = valor_hora_ordinaria * horas_ordinarias
+                salario_extra = valor_hora_extra * horas_extras
+                total_salario = salario_ordinario + salario_extra
+            else:
+                horas_ordinarias = 40
+                horas_extras = horas_laboradas - horario_ordinario
+                salario_ordinario = valor_hora_ordinaria * horas_ordinarias
+                salario_extra = valor_hora_extra * horas_extras
+                total_salario = salario_ordinario + salario_extra
+            print(f'\n--- Datos del trabajador No. {trabajador+1} ---\n')
+            print(f'Horas laboradas: {horas_laboradas}')
+            print(f'Horas ordinarias laboradas: {horas_ordinarias}')
+            print(f'Horas extras laboradas: {horas_extras}')
+            print(f'Salario ord. laborado: {salario_ordinario}')
+            print(f'Salario extra laborado: {salario_extra}')
+            print(f'Salario total: {total_salario}\n')
+            total_salario_ordinario += salario_ordinario
+            total_salario_extra += salario_extra
+            total_salario_trabajadores += total_salario
+        print('\n--- Resumen de liquidación de nómina del personal ---\n')
+        print(f'Salario total ordinario: {total_salario_ordinario}')
+        print(f'Salario total extra: {total_salario_extra}')
+        print(f'Salario total general: {total_salario_trabajadores}')
+    else:
+        print('\nPara realizar un cálculo válido de nómina se debe ingresar'
+              ' un número de trabajadores igual o mayor a 1.')
+
+
+print('\n---------- TOMA DE MUESTRAS DE EDADES DE ANIMALES ----------\n')
+no_trabajadores = int(input('Ingrese número de trabajadores (mayor a 0): '))
+calcular_salario(no_trabajadores)
