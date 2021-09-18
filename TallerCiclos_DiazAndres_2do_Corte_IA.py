@@ -280,3 +280,29 @@ def calcular_promedio_edades(no_personas=0):
 print('\n------ TOMA DE MUESTRAS DE EDADES DE UN GRUPO DE PERSONAS ------\n')
 no_personas = int(input('Ingrese número de personas (mayor a 0): '))
 calcular_promedio_edades(no_personas)
+
+# 5. Encontrar el menor valor de un conjunto de n números dados.
+
+
+def calcular_menor_valor(no_valores=0):
+    if(no_valores > 0):
+        valores = []
+        for item in range(no_valores):
+            valor_ingresar = random.randint(0, 100)
+            valores.append(valor_ingresar)
+        menor_valor = valores[0]
+        for valor in range(no_valores - 1):
+            if(valores[valor] < menor_valor):
+                menor_valor = valores[valor]
+        print('\n------ Resultados de los comparativos ------\n')
+        print(f'La cantidad de valores es: {no_valores}')
+        print(f'Los valores son: {valores}')
+        print(f'El menor de los valores es: {menor_valor}')
+    else:
+        print('\nPara realizar una validación correcta la cantidad de números '
+              'a evaluar debe ser igual o mayor a 1.')
+
+
+print('\n------ COMPARATIVO DE VALORES (EVALUAR EL MENOR) ------\n')
+no_valores = int(input('Ingrese la cantidad de números a evaluar: '))
+calcular_menor_valor(no_valores)
